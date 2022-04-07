@@ -43,10 +43,13 @@ function word_count_words($content){
     //php helper for remove the html tag from contact
     $stripped_content = strip_tags($content);
      //php helper for count total word from any post content
-    $wordn = str_word_count($stripped_content);
+    $totalWord= str_word_count($stripped_content);
     $label = __('Total Number of Words', 'word-count');
+    //__Filter Hook for User Input__//
+    $label_for_userInput = apply_filters("wordcount_heading", $label);
+    $tag = apply_filters("wordcount_tag", 'h2');
     //Result
-    $content .= sprintf('<h2>%s: %s</h2>', $label, $wordn);
+    $content .= sprintf('<%s>%s: %s</%s>', $tag, $label_for_userInput, $totalWord, $tag);
     return $content;
 }
 //Filter Hook for get wp content
